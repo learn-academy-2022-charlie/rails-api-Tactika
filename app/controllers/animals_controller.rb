@@ -42,6 +42,16 @@ class AnimalsController < ApplicationController
     end
   end
 
+  # Create API Endpoint - Create an Animal
+  def create
+    animal = Animal.new(animal_params)
+    if animal.save
+      render json:animal
+    else
+      render json:animal.errors
+    end
+  end
+
   private
   def animal_params
     params.require(:animal).permit(:common_name, :latin_name, :kingdom)
