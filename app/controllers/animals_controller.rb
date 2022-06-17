@@ -1,4 +1,5 @@
 class AnimalsController < ApplicationController
+  # Index API Endpoint - Return All Animals
   def index
     animals = Animal.all
     if animals
@@ -6,5 +7,31 @@ class AnimalsController < ApplicationController
     else
       render json:animals.errors
     end
+  end
+
+  # Show API Endpoint - Return Animal by ID
+  def show
+    animal = Animal.find(params[:id])
+    if animal
+      render json:animal
+    else
+      render json:animal.errors
+    end
+  end
+
+  # Update API Endpoint - Update & Return Animal by ID
+  def update
+    animal = Animal.find(params[:id])
+
+    if animal.update(animal_params)
+      render json:animal
+    else
+      render json:animal.errors
+    end
+  end
+
+  private
+  def animal_params
+    params.require(:animal).permit(:common_name, :latin_name, :kingdom)
   end
 end
