@@ -30,6 +30,18 @@ class AnimalsController < ApplicationController
     end
   end
 
+  # Destroy API Endpoint - Destroy Animal by ID
+  def destroy
+    animal = Animal.find(params[:id])
+
+    if animal.valid?
+      animal.destroy
+      render json:animal
+    else
+      render json:animal.errors
+    end
+  end
+
   private
   def animal_params
     params.require(:animal).permit(:common_name, :latin_name, :kingdom)
