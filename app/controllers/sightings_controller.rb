@@ -19,6 +19,15 @@ class SightingsController < ApplicationController
       render json:sighting.errors
     end
   end
+  # Create API Method - Create a single
+  def create
+    sighting = Sighting.new(sighting_params)
+    if sighting.save
+      render json:sighting
+    else
+      render json:sighting.errors
+    end
+  end
   # Update API Method
   def update
     sighting = Sighting.find(params[:id])
