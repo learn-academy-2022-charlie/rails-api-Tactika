@@ -2,6 +2,7 @@ class AnimalsController < ApplicationController
   # Index API Endpoint - Return All Animals
   def index
     animals = Animal.all
+
     if animals
       render json:animals
     else
@@ -13,7 +14,8 @@ class AnimalsController < ApplicationController
   def show
     animal = Animal.find(params[:id])
     if animal
-      render json:animal
+      animal_plus_sightings = animal.as_json(include: :sightings)
+      render json:animal_plus_sightings
     else
       render json:animal.errors
     end

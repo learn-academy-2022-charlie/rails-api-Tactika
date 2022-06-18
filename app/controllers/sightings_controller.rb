@@ -28,10 +28,19 @@ class SightingsController < ApplicationController
       render json:sighting.errors
     end
   end
-  # Update API Method
+  # Update API Method - Update a record using ID
   def update
     sighting = Sighting.find(params[:id])
     if sighting.update(sighting_params)
+      render json:sighting
+    else
+      render json:sighting.errors
+    end
+  end
+  # Delete API Method - Delete one sighting by ID
+  def destroy
+    sighting = Sighting.find(params[:id])
+    if sighting.delete.valid?
       render json:sighting
     else
       render json:sighting.errors
