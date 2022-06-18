@@ -33,5 +33,9 @@ module WildlifeTracker
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # CUSTOM TESTING
+    config.load_defaults 7.0
+    config.exceptions_app = self.routes
   end
 end
