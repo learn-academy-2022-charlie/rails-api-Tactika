@@ -11,4 +11,15 @@ RSpec.describe Animal, type: :model do
     expect(common_name_input.errors[:latin_name]).to_not be_empty
   end
 
+  it 'Animal should require a common name to be unique' do
+    Animal.create common_name: "Grey Wolf", latin_name: "Canis Lupus", kingdom:"Animalia"
+    common_name_input = Animal.create common_name: "Grey Wolf", latin_name: "Lupus Canis", kingdom:"Animalia"
+    expect(common_name_input.errors[:common_name]).to_not be_empty
+  end
+
+  it 'Animal should require a latin name to be unique' do
+    Animal.create common_name: "Grey Wolf", latin_name: "Canis Lupus", kingdom:"Animalia"
+    common_name_input = Animal.create common_name: "Wolf Grey", latin_name: "Canis Lupus", kingdom:"Animalia"
+    expect(common_name_input.errors[:latin_name]).to_not be_empty
+  end
 end
